@@ -1,0 +1,20 @@
+
+
+Para acesso ao Sistema de Vendas:
+
+http://143.244.215.137:3002/
+
+Login: vendedor1
+
+Senha: ia_nova_drive
+
+Exemplo:
+Codigo 292501 da primeira venda incluida atravez do site "Sistema de Vendas"
+
+
+Para consultar uma venda pelo ID da venda:
+
+http://143.244.215.137:3002/procura
+
+
+

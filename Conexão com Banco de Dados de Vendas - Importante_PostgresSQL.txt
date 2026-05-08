@@ -1,0 +1,20 @@
+Olá,
+
+Segue abaixo os dados para conexão com banco de dados do sistema de vendas.
+
+As informações podem mudar, consulte sempre aqui os dados mais atualizados
+
+Você vai usar estes dados não apenas nesta seção, mas em seções posteriores do curso
+
+Durante as aulas você vai ser orientado como utilizar estas informações
+
+host: 159.223.187.110
+
+dbname ou database ou banco de dados: novadrive
+
+user ou usuário: etlreadonly
+
+password ou senha: novadrive376A@
+
+port ou porta: 5432
+

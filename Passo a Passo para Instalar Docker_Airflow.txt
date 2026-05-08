@@ -1,0 +1,94 @@
+
+
+Olá,
+
+Este comando serão usado na aula seguinte para instalar, configurar e iniciar o Airflow com Docker. 
+Você pode copiar estes comandos para não precisar digitar, mas é imporante você seguir as orientações da aula.
+
+
+#APT é uma lista de pacote do sistema de distribuição do linux.
+#1- Atualizar a lista de pacotes do APT:
+sudo apt-get update
+
+#Comando abaixo será para instalar os pacotes necessários para instalar o novo diretório.
+#2-Instalar pacotes necessários para adicionar um novo repositório via HTTPS:
+sudo apt-get install ca-certificates curl gnupg lsb-release
+
+
+#3- Criar diretório para armazenar as chaves de repositórios 
+sudo mkdir -m 0755 -p /etc/apt/keyrings
+
+#Comando abaixo é para fazer o donwload das chaves GPC para o repositorio.
+#4- Adicionar a chave GPG do repositório do Docker:
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+
+#Comando abaixo, irá adicionar o diretório para a fonte do APT(Gerenciador de pacote do linux), ou seja, para o APT saber aonde ele poderá buscar a listagem dos pacote APT no Docker.
+#5- Adicionar o repositório do Docker às fontes do APT:
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ 
+#6- Atualiza a lista de pacotes após adicionar o novo repositório do Docker
+sudo apt-get update
+
+
+#7- Instalar o Docker e componentes
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# O arquivo docker-compose que o comando abaixo vai baixar, contém as configurações do Apacher Airflow
+#8- Baixar o arquivo docker-compose.yaml do Airflow:
+curl -LfO 'https://airflow.apache.org/docs/apache-airflow/stable/docker-compose.yaml'
+
+
+#comando para ver dentro do arquivo docker-compose.
+
+cat docker-compose.yaml
+
+#Criando os diretórios que o Airflow vai utilizar.
+#9- Criar diretórios para DAGs, logs e plugins:
+mkdir -p ./dags ./logs ./plugins
+
+
+#10- Criar um arquivo .env com o UID do usuário, usado pelo docker para permissões que o Docke vai precisa
+echo -e "AIRFLOW_UID=$(id -u)" > .env  
+
+# comando para ver a variavel  .env  
+cat .env
+
+Resulta que deve aparecer.
+AIRFLOW_UID=1000
+ 
+#11- inicia o airflow
+sudo  docker compose up airflow-init
+ 
+#12 -subir o Airflow em modo desacoplado para o docker encontrar o docker-compose.yaml
+# Comando abaixo é para baixar cada CONTENDER que faz parte do Airflow
+sudo docker compose up -d
+ 
+
+#Após executar o comando 12, usar o comando abaixo para verificar se o status estão todos como "healty"
+
+sudo docker ps
+
+#aguardar até tudo estar com status "healty"
+
+# copiar Public IPv4 DNS e colocar porta 8080, 
+# este é só um exemplo:
+http://ec2-35-175-126-189.compute-1.amazonaws.com:8080/
+ 
+#editar
+nano /home/ubuntu/docker-compose.yaml
+ 
+#mudar para falso
+AIRFLOW__CORE__LOAD_EXAMPLES: 'true' 
+
+#Após realizar a troca do comando acima com Cursor.
+
+Aperte 
+
+Ctrl + O , Enter(Para Sarvar e sobrescrever o arquivo) e por final Ctrl + X
+
+#Precisa reiunicar o Docker para set as novas configurações. 
+#reiniciar
+sudo docker compose stop
+sudo docker compose up -d
+sudo docker ps
