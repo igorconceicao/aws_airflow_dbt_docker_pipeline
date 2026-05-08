@@ -1,0 +1,89 @@
+
+
+Para executar uma Daga no ambiente LINUX siga os passos abaixo:
+
+1. Se conecte no servidor linux. 
+
+2. Vá até a pasta aonde está o certificado de conexão.
+
+Deu um comando PWD 
+
+Resultado tem que dar: 
+
+/home/ubuntu
+
+de um ls para verificar os arquivo dentro da caminho acima. 
+
+ubuntu@ip-172-31-47-90:~$ ls
+config  dags  docker-compose.yaml  logs  plugins 
+
+
+3. De o comando "sudo docker ps" para verificar os contender estão com status de "healthy"
+
+ubuntu@ip-172-31-47-90:~$ sudo docker ps
+CONTAINER ID   IMAGE                  COMMAND                  CREATED      STATUS                    PORTS                                         NAMES
+d5476989ca9c   apache/airflow:3.2.0   "/usr/bin/dumb-init …"   6 days ago   Up 29 minutes (healthy)   8080/tcp                                      ubuntu-airflow-worker-1
+6bf28fc90c53   apache/airflow:3.2.0   "/usr/bin/dumb-init …"   6 days ago   Up 29 minutes (healthy)   8080/tcp                                      ubuntu-airflow-triggerer-1
+f453915f33e3   apache/airflow:3.2.0   "/usr/bin/dumb-init …"   6 days ago   Up 29 minutes (healthy)   8080/tcp                                      ubuntu-airflow-dag-processor-1
+13647c8d1786   apache/airflow:3.2.0   "/usr/bin/dumb-init …"   6 days ago   Up 29 minutes (healthy)   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp   ubuntu-airflow-apiserver-1
+f0c412073a7a   apache/airflow:3.2.0   "/usr/bin/dumb-init …"   6 days ago   Up 29 minutes (healthy)   8080/tcp                                      ubuntu-airflow-scheduler-1
+73e6d7f2b0cc   postgres:16            "docker-entrypoint.s…"   6 days ago   Up 29 minutes (healthy)   5432/tcp                                      ubuntu-postgres-1
+d674e7becc94   redis:7.2-bookworm     "docker-entrypoint.s…"   6 days ago   Up 29 minutes (healthy)   6379/tcp                                      ubuntu-redis-1
+ubuntu@ip-172-31-47-90:~$
+
+
+4. Vá para a pas Dags/
+
+ubuntu@ip-172-31-47-90:~$ cd dags/
+ubuntu@ip-172-31-47-90:~/dags$
+
+
+
+5. Como não irá ter arquivo nenhum lá dentro, termos que qcriar um arquivo em Python lá. 
+
+
+ubuntu@ip-172-31-47-90:~/dags$ ls
+ubuntu@ip-172-31-47-90:~/dags$
+ubuntu@ip-172-31-47-90:~/dags$ touch novadrive.py
+ubuntu@ip-172-31-47-90:~/dags$
+ubuntu@ip-172-31-47-90:~/dags$ ls
+novadrive.py
+ubuntu@ip-172-31-47-90:~/dags$ 
+
+
+
+6. User o comando mais amigável para edição de aquivos no linux,
+chamado nano para colocar o script das dag.py dentro dele.
+
+
+ubuntu@ip-172-31-47-90:~/dags$ nano novadrive.py 
+
+Após colcar o script da dag.py usar os seguintes comandos abaixo para salvar o arquivo: 
+
+Ctrol + x para salver -> Y -> Enter
+
+
+
+7. Der um cat para verificar o codigo dentro do arquivo certinho.
+
+
+ubuntu@ip-172-31-47-90:~/dags$ cat novadrive.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
